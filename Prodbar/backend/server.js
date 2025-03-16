@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
+import Product from './models/product.model.js';
 
 dotenv.config();
 
@@ -15,7 +16,7 @@ app.post("/api/products", async (req, res) => {
         return res.status(400).json({ success:false, message: "Please provide all fields"});
     }
     // res.send("Server is ready");
-    const newProduct = new product(product)
+    const newProduct = new Product(product);
     try {
         await newProduct.save();
         res.status(201).json({success: true, data: newProduct});
